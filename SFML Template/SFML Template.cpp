@@ -229,7 +229,34 @@ int main()
 					gameoverFlag = false;
 					spritePlayer.setTexture(texPlayer);
 					timeBar.setSize(sf::Vector2f(timeBarWidth, timeBarheight));
-					score = 0;
+					score = 0;	
+					posBranch.x = vm.width / 2;
+					posBranch.y = vm.height / 2 + 150;
+					for (int i = 0; i < BRANCH_NUM; i++)
+					{
+						spriteBranch[i].setOrigin(-(texTree.getSize().x / 2.f), (texBranch.getSize().y / 2.f));
+					}
+
+					for (int i = 0; i < BRANCH_NUM; i++)
+					{
+						sideBarnches[i] = (Sides)(rand() % 3);
+
+						while (sideBarnches[0] == Sides::Right)
+							sideBarnches[0] = (Sides)(rand() % 3);
+
+						spriteBranch[i].setPosition(posBranch);
+						posBranch.y -= 150.f;
+						switch (sideBarnches[i])
+						{
+						case Sides::Left:
+							spriteBranch[i].setScale(-1.f, 1);
+							break;
+						case Sides::Right:
+							spriteBranch[i].setScale(1.f, 1);
+							break;
+						}
+					}
+
 					break;
 
 				case sf::Keyboard::Left:
