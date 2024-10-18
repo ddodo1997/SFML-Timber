@@ -90,8 +90,7 @@ int main()
 	{
 		sideBarnches[i] = (Sides)(rand() % 3);
 
-		while(sideBarnches[0] == Sides::Right)
-			sideBarnches[0] = (Sides)(rand() % 3);
+		sideBarnches[0] = Sides::None;
 
 		spriteBranch[i].setPosition(posBranch);
 		posBranch.y -= 150.f;
@@ -189,6 +188,7 @@ int main()
 		isRightKeyDown = false;
 		isLeftKey = false;
 		isRightKey = false;
+
 		//메세지(이벤트) 루프
 		sf::Event ev;
 		while (window.pollEvent(ev))
@@ -223,10 +223,10 @@ int main()
 				case sf::Keyboard::Return:
 					if (!gameoverFlag)
 					{
-						pauseFlag = pauseFlag ? !pauseFlag : !pauseFlag;
+						pauseFlag = !pauseFlag;
 						break;
 					}
-					gameoverFlag = false;
+					gameoverFlag = !gameoverFlag;
 					spritePlayer.setTexture(texPlayer);
 					timeBar.setSize(sf::Vector2f(timeBarWidth, timeBarheight));
 					score = 0;	
@@ -241,8 +241,7 @@ int main()
 					{
 						sideBarnches[i] = (Sides)(rand() % 3);
 
-						while (sideBarnches[0] == Sides::Right)
-							sideBarnches[0] = (Sides)(rand() % 3);
+						sideBarnches[0] = Sides::None;
 
 						spriteBranch[i].setPosition(posBranch);
 						posBranch.y -= 150.f;
